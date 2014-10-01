@@ -61,7 +61,7 @@
 			<div class="empdetails">
 				<div style="width: 12px; float:left;"><img src="./icons/beta.gif" /></div>	
 				<div id="rtwoptions" style="margin-bottom: 5px;">
-					<h1 style="color: #b31b1b; text-align: center;">Road to Workplace</h1>
+					<h1 style="color: #b31b1b; text-align: center;">Road to the Workplace</h1>
 					<div id="options"><a href="<?php echo base_url(); ?>" title="Home" target="_self"><img class="mainoptions" src="./icons/home.png" /></a><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
 				</div>
 				<div id="empdetailsleft">
@@ -93,41 +93,39 @@
 					}
 				     ?>				
 				<h2 id="empname"><?php echo $employer; ?></h2>
-				<p class="viewdetails"><strong>Ticker: </strong><?php echo $ticker; ?></p>
-				<p class="viewdetails"><strong>Location: </strong><?php echo $location; ?></p>
-				<p class="viewdetails"><strong>Region: </strong><?php echo $region; ?></p>
-				<!--p class="viewdetails"><strong>Size: </strong><?php echo $size; ?></p-->
-				<p class="viewdetails"><strong>No. of Employees: </strong><?php echo $noofemp; ?></p>				
-				<p class="viewdetails"><strong>Affiliates: </strong><?php echo $affiliates; ?></p>
-				<p class="viewdetails"><strong>Budget: </strong><?php echo $budget; ?></p>
+				<p class="viewdetails" id='ticker'><strong>Ticker: </strong><?php echo $ticker; ?></p>
+				<p class="viewdetails" id='location'><strong>Location: </strong><?php echo $location; ?></p>
+				<p class="viewdetails" id='region'><strong>Region: </strong><?php echo $region; ?></p>
+				<p class="viewdetails" id='noofemp'><strong>No. of Employees: </strong><?php echo $noofemp; ?></p>				
+				<p class="viewdetails" id='affiliates'><strong>Affiliates: </strong><?php echo $affiliates; ?></p>
+				<p class="viewdetails" id='budget'><strong>Budget: </strong><?php echo $budget; ?></p>
 				
-				<p class="viewdetails"><strong>Websites:</strong><br/><br/>
+				<p class="viewdetails" id='websites'><strong>Websites:</strong><br/><br/>
 					<?php echo $website; ?><br/>
 					<?php echo $corporatewebsite; ?><br/>
 					<?php echo $additionalwebsites; ?>
 				</p>
 				
-				<p class="viewdetails"><strong>Contact Information: </strong><br/><br/>
-					<?php echo $hrcontactinfo; ?><br/>
-					<?php echo $jobfaircontactinfo; ?><br/>
+				<p class="viewdetails" id='contactinfo'><strong>Contact Information: </strong><br/><br/>
+					<?php echo $hrcontactinfo; ?>
+					<?php echo $jobfaircontactinfo; ?>
 				</p>
 				
-				<p class="viewdetails"><strong>Leadership: </strong><br/><br/>
+				<p class="viewdetails" id='leadership'><strong>Leadership: </strong><br/><br/>
 						<?php echo $leadership; ?>
 				</p> 
 				
 				<p class="viewdetails"><strong>News &amp; Social Media: </strong><br/><br/>
 					<a href=<?php echo $news; ?> target="_blank"><img class="icons" src="./icons/rss.png"/></a>
-					
 					<a href=<?php echo $twitter; ?> target="_blank"><img class="icons" src="./icons/twitter.png"/></a>
 					<a href=<?php echo $facebook; ?> target="_blank"><img class="icons" src="./icons/facebook.png"/></a>
 				</p>
 				
-				<p class="viewdetails"><strong>Other Social Media Links: </strong><br/><br/>
+				<p class="viewdetails" id='othersocialmedia'><strong>Other Social Media Links: </strong><br/><br/>
 					<?php echo $socialmedia; ?>
 				</p>
 				
-				<p class="viewdetails"><strong>Associated Majors: </strong><br/><br/>
+				<p class="viewdetails" id='major'><strong>Associated Majors: </strong><br/><br/>
 					<?php
 					foreach ($majors as $row1) {
 						$mid = $row1 -> mid;
@@ -139,7 +137,7 @@
 					<?php } ?>
 				</p>
 				
-				<p class="viewdetails"><strong>Associated Industries: </strong><br/><br/>
+				<p class="viewdetails" id='industry'><strong>Associated Industries: </strong><br/><br/>
 					<?php
 					foreach ($industries as $row2) {
 						$iid = $row2 -> iid;
@@ -154,38 +152,74 @@
 				</div>
 			
 				<div id="empdetailsright">
-					<p class="viewdetails"><strong>Mission Statement: </strong><br/><br/>
+					<p class="viewdetails" id='missionstmt'><strong>Mission Statement: </strong><br/><br/>
 						<?php echo $missionstmt; ?>
 					</p>
-					<p class="viewdetails"><strong>Employer Overview: </strong><br/>
+					<p class="viewdetails" id='overview'><strong>Employer Overview: </strong><br/>
 						<?php echo $overview; ?>
 					</p>
 					
-					<p class="viewdetails"><strong>Company Culture: </strong><br/><br/>
+					<p class="viewdetails" id='culture'><strong>Company Culture: </strong><br/><br/>
 						<?php echo $culture; ?>
 					</p>
-					<p class="viewdetails"><strong>Financials: </strong><br/>
+					<p class="viewdetails" id='financials'><strong>Financials: </strong><br/>
 						<?php echo $financials; ?>
 					</p>
-					<p class="viewdetails"><strong>Citations: </strong><br/>
+					<p class="viewdetails" id='citations'><strong>Citations: </strong><br/>
 						<?php echo $citations; ?>
 				    </p>
 				</div>
 				
 		</div>
 		</div>
-		
-
 			<div class="bottom">
 				<p class = "foot">
 					Marist College, 3399 North Road, Poughkeepsie, NY 12601; 845-575-3000
 					<br />
 					&#169; Copyright 2007-2014 Marist College. All Rights Reserved.
 
-					<a href="http://www.marist.edu/disclaimers.html" target="_blank" >Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a> 
+					<a href="http://www.marist.edu/disclaimers.html" target="_blank">Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a> 
 				</p>
 
 			</div>
-
+			<script type="text/javascript">
+				window.onload = function(){
+					alert(document.getElementById('financials').innerHTML);
+					// debugger;
+					if(document.getElementById('ticker').innerHTML == '<strong>Ticker: </strong>'){
+						document.getElementById('ticker').innerHTML = '';
+					}
+					if(document.getElementById('location').innerHTML == '<strong>Location: </strong>'){
+						document.getElementById('location').innerHTML = '';
+					}
+					if(document.getElementById('region').innerHTML == '<strong>Region: </strong>'){
+						document.getElementById('region').innerHTML = '';
+					}
+					if(document.getElementById('noofemp').innerHTML == '<strong>No. of Employees: </strong>'){
+						document.getElementById('noofemp').innerHTML = '';
+					}
+					if(document.getElementById('affiliates').innerHTML == '<strong>Affiliates: </strong>'){
+						document.getElementById('affiliates').innerHTML = '';
+					}
+					if(document.getElementById('budget').innerHTML == '<strong>Budget: </strong>'){
+						document.getElementById('budget').innerHTML = '';
+					}
+					if(document.getElementById('contactinfo').innerHTML.trim() == '<strong>Contact Information: </strong><br><br>'){
+						document.getElementById('contactinfo').innerHTML = '';
+					}
+					if(document.getElementById('othersocialmedia').innerHTML.trim() == '<strong>Other Social Media Links: </strong><br><br>'){
+						document.getElementById('othersocialmedia').innerHTML = '';
+					}
+					if(document.getElementById('culture').innerHTML.trim() == '<strong>Company Culture: </strong><br><br>'){
+						document.getElementById('culture').innerHTML = '';
+					}
+					if(document.getElementById('financials').innerHTML.trim() == '<strong>Financials: </strong><br>'){
+						document.getElementById('financials').innerHTML = '';
+					}
+					if (document.getElementById('citations').innerHTML.trim() == '<strong>Citations: </strong><br>') {
+						document.getElementById('citations').innerHTML = '';
+					};
+				}
+			</script>
 	</body>
 </html>
