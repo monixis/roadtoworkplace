@@ -57,12 +57,12 @@
 
        </script>
        <style>
-       	@-moz-document url-prefix() { 
-  #searching {
-  	margin-left: 270px;
-      }
-}
-       </style>
+			@-moz-document url-prefix() {
+				#searching {
+				margin-left: 270px;
+			}
+			}
+		</style>
 	</head>
 	<body>
 
@@ -87,6 +87,7 @@
 					<div id="options"><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
 				</div>
 				
+				<div id="breadcrumbs"><p id="searchlimit">This is a test</p></div>
 				
 				<div id="refine">
 					
@@ -171,7 +172,7 @@
 				
 					
 				</div>
-				<div id="search"><a class="btn" id="s" style="float:left">Apply</a><a class="btn" id="c" style="float:right">Clear</a></div>
+				<div id="search"><!--a class="btn" id="s" style="float:left">Apply</a--><a class="btn" id="c" style="float:left">Clear</a></div>
 			</div>
 
 			<div class="bottom">
@@ -191,6 +192,7 @@
 				
 				$("input.refiner").click(function(){
 					etype = $(this).val();
+					search();
 				});
 			
 				$("input.majors").click(function() {
@@ -226,6 +228,7 @@
 						
 						}
 					}
+					search();
 				});
 				
 				$("input.industry").click(function() {
@@ -263,10 +266,41 @@
 									}
 						}
 						
-						
+					search();	
 				});
-			
-				$("#s").click(function(){
+		 	
+				
+				$("#maj-option").click(function(){
+					$("#majmore").toggle(function(){
+						if ($("#maj-option").text() == "more"){
+							$("#maj-option").text("less");
+						}else{
+							$("#maj-option").text("more");
+						}
+					});
+				});
+				
+				$("#ind-option").click(function(){
+					$("#indmore").toggle(function(){
+						if ($("#ind-option").text() == "more"){
+							$("#ind-option").text("less");
+						}else{
+							$("#ind-option").text("more");
+						}
+					});
+					
+				});
+				
+				$("#c").click(function(){
+										
+					$('input[type=checkbox]').attr('checked', false);		
+					ind="";
+					maj="";
+				$('#emplist').load('http://localhost/roadtoworkplace/?c=rtw&m=getemployers');
+				});
+				
+				
+				function search(){
 					
 					if (etype == 0){
 						url = "<?php echo base_url("?c=rtw&m=getrefinedemployers"); ?>" + "&qry=emptype%20in%20(1,2,3,4,5,6)"; 
@@ -301,41 +335,11 @@
 				
 					$('#emplist').load(url);
 						//$('#emplist').load("http://library.marist.edu/roadtoworkplace/?c=rtw&m=getrefinedemployers");
+					$('#breadcrumbs').empty().html('<p id="searchlimit">'+ url +'</p>');	
 						
-						
-				}, 60500);
+				}, 1500);
 		
-				});
-				
-				$("#maj-option").click(function(){
-					$("#majmore").toggle(function(){
-						if ($("#maj-option").text() == "more"){
-							$("#maj-option").text("less");
-						}else{
-							$("#maj-option").text("more");
-						}
-					});
-				});
-				
-				$("#ind-option").click(function(){
-					$("#indmore").toggle(function(){
-						if ($("#ind-option").text() == "more"){
-							$("#ind-option").text("less");
-						}else{
-							$("#ind-option").text("more");
-						}
-					});
-					
-				});
-				
-				$("#c").click(function(){
-										
-					$('input[type=checkbox]').attr('checked', false);		
-					ind="";
-					maj="";
-				$('#emplist').load('http://localhost/roadtoworkplace/?c=rtw&m=getemployers');
-				});
-				
+				}
 				
 			</script>
 			

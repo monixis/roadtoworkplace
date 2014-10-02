@@ -1140,3 +1140,13 @@ opacity: .5;
 img{
 	border: 1px solid #ffffff;
 }
+
+#breadcrumbs{
+	height:14px;
+	width: inherit;
+	/*border: 1px solid;*/
+}
+
+#searchlimit{
+	margin-top: 0px;
+}
