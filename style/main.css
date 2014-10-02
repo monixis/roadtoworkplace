@@ -1150,3 +1150,8 @@ img{
 #searchlimit{
 	margin-top: 0px;
 }
+
+#rss-news{
+	height: 145px;
+	overflow-y: hidden;
+}

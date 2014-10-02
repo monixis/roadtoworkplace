@@ -11,6 +11,8 @@
 		<script src="http://library.marist.edu/js/libraryMenu.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="http://library.marist.edu/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 		<script src="http://library.marist.edu/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("a[rel^='prettyPhoto']").prettyPhoto({
@@ -22,7 +24,18 @@
 					keyboard_shortcuts : false,
 					theme: "facebook"
 				});
+				
+			
+			$('#rss-news').hover(function() {
+					$(this).css('overflow-y', 'auto');
+				}, function() {
+					$(this).css('overflow-y', 'hidden');
+			});	
+			
 			});
+			
+		
+				
 		</script>
 		<script>
 			(function(i, s, o, g, r, a, m) {
@@ -42,7 +55,6 @@
 
        </script>
 	</head>
-	
 	
 	<body>
 		<div id="headerContainer">
@@ -115,8 +127,13 @@
 						<?php echo $leadership; ?>
 				</p> 
 				
-				<p class="viewdetails"><strong>News &amp; Social Media: </strong><br/><br/>
-					<a href=<?php echo $news; ?> target="_blank"><img class="icons" src="./icons/rss.png"/></a>
+				<p class="viewdetails" style="margin-top: 0px;"><strong>News</strong></p>
+				<div id="rss-news">
+					
+				</div>
+				
+				<p class="viewdetails"><strong>Social Media: </strong><br/><br/>
+					<!--a href=<?php echo $news; ?> target="_blank"><img class="icons" src="./icons/rss.png"/></a-->
 					<a href=<?php echo $twitter; ?> target="_blank"><img class="icons" src="./icons/twitter.png"/></a>
 					<a href=<?php echo $facebook; ?> target="_blank"><img class="icons" src="./icons/facebook.png"/></a>
 				</p>
@@ -184,7 +201,7 @@
 			</div>
 			<script type="text/javascript">
 				window.onload = function(){
-					alert(document.getElementById('financials').innerHTML);
+					//alert(document.getElementById('financials').innerHTML);
 					// debugger;
 					if(document.getElementById('ticker').innerHTML == '<strong>Ticker: </strong>'){
 						document.getElementById('ticker').innerHTML = '';
@@ -219,7 +236,16 @@
 					if (document.getElementById('citations').innerHTML.trim() == '<strong>Citations: </strong><br>') {
 						document.getElementById('citations').innerHTML = '';
 					};
+					
 				}
+				
+				$('#rss-news').ready(function(){
+		     		$("#rss-news").rss("<?php echo $news; ?>", {
+						limit : 5,
+						layoutTemplate : '<span id="entries">{entries}</span>',
+						entryTemplate : '<a href="{url}" target="_blank">{title}</a></br></br>|'
+					}).show();
+				});	
 			</script>
 	</body>
 </html>
