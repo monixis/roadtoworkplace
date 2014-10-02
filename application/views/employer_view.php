@@ -201,6 +201,7 @@
 			</div>
 			<script type="text/javascript">
 				window.onload = function(){
+<<<<<<< HEAD
 					//alert(document.getElementById('financials').innerHTML);
 					// debugger;
 					if(document.getElementById('ticker').innerHTML == '<strong>Ticker: </strong>'){
@@ -237,6 +238,18 @@
 						document.getElementById('citations').innerHTML = '';
 					};
 					
+=======
+					var tags = document.getElementsByTagName('p')
+					for (var i = 0; i < tags.length; i++) {
+						if(tags[i].nextSibling.nodeName != 'UL'){
+							if(tags[i].innerText.trim().substring(tags[i].innerText.trim().length - 1) == ':'){
+								if (tags[i].innerText.trim() != 'News & Social Media:') {
+									tags[i].innerHTML = '';
+								}
+							}
+						}
+					}
+>>>>>>> origin/master
 				}
 				
 				$('#rss-news').ready(function(){
