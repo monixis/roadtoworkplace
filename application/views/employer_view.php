@@ -184,41 +184,16 @@
 			</div>
 			<script type="text/javascript">
 				window.onload = function(){
-					alert(document.getElementById('financials').innerHTML);
-					// debugger;
-					if(document.getElementById('ticker').innerHTML == '<strong>Ticker: </strong>'){
-						document.getElementById('ticker').innerHTML = '';
+					var tags = document.getElementsByTagName('p')
+					for (var i = 0; i < tags.length; i++) {
+						if(tags[i].nextSibling.nodeName != 'UL'){
+							if(tags[i].innerText.trim().substring(tags[i].innerText.trim().length - 1) == ':'){
+								if (tags[i].innerText.trim() != 'News & Social Media:') {
+									tags[i].innerHTML = '';
+								}
+							}
+						}
 					}
-					if(document.getElementById('location').innerHTML == '<strong>Location: </strong>'){
-						document.getElementById('location').innerHTML = '';
-					}
-					if(document.getElementById('region').innerHTML == '<strong>Region: </strong>'){
-						document.getElementById('region').innerHTML = '';
-					}
-					if(document.getElementById('noofemp').innerHTML == '<strong>No. of Employees: </strong>'){
-						document.getElementById('noofemp').innerHTML = '';
-					}
-					if(document.getElementById('affiliates').innerHTML == '<strong>Affiliates: </strong>'){
-						document.getElementById('affiliates').innerHTML = '';
-					}
-					if(document.getElementById('budget').innerHTML == '<strong>Budget: </strong>'){
-						document.getElementById('budget').innerHTML = '';
-					}
-					if(document.getElementById('contactinfo').innerHTML.trim() == '<strong>Contact Information: </strong><br><br>'){
-						document.getElementById('contactinfo').innerHTML = '';
-					}
-					if(document.getElementById('othersocialmedia').innerHTML.trim() == '<strong>Other Social Media Links: </strong><br><br>'){
-						document.getElementById('othersocialmedia').innerHTML = '';
-					}
-					if(document.getElementById('culture').innerHTML.trim() == '<strong>Company Culture: </strong><br><br>'){
-						document.getElementById('culture').innerHTML = '';
-					}
-					if(document.getElementById('financials').innerHTML.trim() == '<strong>Financials: </strong><br>'){
-						document.getElementById('financials').innerHTML = '';
-					}
-					if (document.getElementById('citations').innerHTML.trim() == '<strong>Citations: </strong><br>') {
-						document.getElementById('citations').innerHTML = '';
-					};
 				}
 			</script>
 	</body>
