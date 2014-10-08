@@ -87,7 +87,9 @@
 					<div id="options"><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
 				</div>
 				
-				<div id="breadcrumbs"><p id="searchlimit">This is a test</p></div>
+				<div id="breadcrumbs">
+					<p id="results"></p>
+				</div>
 				
 				<div id="refine">
 					
@@ -297,6 +299,7 @@
 					ind="";
 					maj="";
 				$('#emplist').load('http://localhost/roadtoworkplace/?c=rtw&m=getemployers');
+				document.getElementById('results').innerHTML = '';
 				});
 				
 				
@@ -317,6 +320,7 @@
 					if (ind.length > 0){
 						url = url  + "%20and%20iid%20in%20(" + ind + ")";
 					}
+					
 				
 				var librarytips = ["Marist Library subscribes to more than 200 databases that you can use for your research.", "Marist Library holds about 195,000 print books.", "Through Marist Library you can get access to 131,000 e-books and 75,000 e-Journals.", "Students may reserve one of the Library's fifteen Collaborative Rooms", "Stop by or make an appointment with our Librarians for a research consulation.", "Fox Hunt searches relevant scholarly and academic resources provided by the Libray."];
 				//alert(url);
@@ -334,12 +338,85 @@
 				
 				
 					$('#emplist').load(url);
+					breadcrumb();
 						//$('#emplist').load("http://library.marist.edu/roadtoworkplace/?c=rtw&m=getrefinedemployers");
-					$('#breadcrumbs').empty().html('<p id="searchlimit">'+ url +'</p>');	
+					// $('#breadcrumbs').empty().html('<p id="searchlimit">'+ url +'</p>');	
 						
 				}, 1500);
 		
 				}
+
+				var majorToNum = new Array();
+        		majorToNum[0] = {1: "Accounting", 2: "Biomedical Sciences", 3: "Business", 4: "Communications", 5: "Computer Science", 6: "Criminal Justice", 7: "Digital Media", 8: "Economics", 9: "Education", 10: "Environmental Science", 11: "Fashion", 12: "Information Technology and Systems", 13: "Liberal Arts", 14: "Mathematics", 15: "Medical Technology", 16: "Natural Science", 17: "Psychology", 18: "Social Work"};
+
+        		var indusToNum = new Array();
+        		indusToNum[0] = {1: "Accounting, Tax Preparation, Bookkeeping, and Payroll", 2: "Advertising, Public Relations and Related Services", 3: "Agriculture, Food, Nutrition", 4: "Arts, Culture, and Humanities", 5: "Alliance/Advocacy Organizations", 6: "Animal Protection and Welfare", 7: "Broadcasting (Television and Radio)", 8: "Children and Youth Services", 9: "Computer Systems Design", 10: "Disease, Disorders, Medical Disciplines", 11: "Educational Services and Schools", 12: "Employement Procurement Assistance and Job Training", 13: "Financial Institutions (banks and credit unions)", 14: "Financial Services (financial advice and planning)", 15: "Health Support Services", 16: "Human Services", 17: "Insurance", 18: "International, Foreign Affairs, and National Security", 19: "Law Enforcement", 20: "Legal Services", 21: "Management of Companies and Enterprises", 22: "Mental Health, Crisis Intervention", 23: "Museums & Museum Activities", 24: "Real Estate", 25: "Rental and Leasing Services", 26: "Retail and Wholesale--Clothing and Clothing Accessories", 27: "Retail and Wholesale--Furnishings and Home Furnishings", 28: "Retail and Wholesale--General Merchandise", 29: "Retail and Wholesale--Health and Personal Care", 30: "Scientific Research and Development Services", 31: "Telecommunications", 32: 'Utilities'};
+
+        		var empToNum = new Array();
+        		empToNum[0] = {1: 'Non-Profit Organization', 2: 'Government Agency', 3: 'Company - Public', 4: 'Company - Private', 5: 'Company - Subsidiary', 6: 'Company - Holding Company'};
+				
+				function breadcrumb(){
+					setTimeout(function(){
+						// debugger;
+						if (document.getElementById('list').childElementCount == 1) {
+							document.getElementById('results').innerHTML = document.getElementById('list').childElementCount + ' result for '
+						}
+						else{
+							document.getElementById('results').innerHTML = document.getElementById('list').childElementCount + ' results for '	
+						}
+
+						var a = maj.split(',');
+						var b = ind.split(',');
+
+						//Employer Type Breadcumb
+						var emps = document.getElementsByClassName('refiner');
+						for (var i = 0; i < emps.length; i++) {
+							if(emps[i].checked && emps[i].value != 0){
+								document.getElementById('results').innerHTML += "<b>Employer Type:</b> " + emps[i].nextSibling.data.trim() + ' -- ';
+								break;
+							}
+						}
+
+						// Major Breadcrumb
+						if(a[0] != ''){
+							var line = '';
+							document.getElementById('results').innerHTML += '<b>Major:</b> ';
+							for (var i = 0; i < a.length; i++) {
+								line += majorToNum[0].getKey(a[i]) + ' -- ';
+							}
+							document.getElementById('results').innerHTML += line;
+						}
+						else if(a[0] = '' && document.getElementById('results').innerHTML != ''){
+							document.getElementById('results').innerHTML.replace(line, '');
+						}
+
+						//Industry Breadcrumb
+						if(b[0] != ''){
+							var line = '';
+							document.getElementById('results').innerHTML += '<b>Industry:</b> ';
+							for (var i = 0; i < b.length; i++) {
+								line += indusToNum[0].getKey(b[i]) + ' -- ';
+							}
+							document.getElementById('results').innerHTML += line;
+						}
+						else if(b[0] = '' && document.getElementById('results').innerHTML != ''){
+							document.getElementById('results').innerHTML.replace(line, '');
+						}
+						if(document.getElementById('results').innerHTML == '56 results for '){
+							document.getElementById('results').innerHTML = ''
+						}
+					}, 250);
+				}
+
+				Object.prototype.getKey = function (value){
+					// debugger;
+          			for (var key in this){ 
+            			if (key === value){
+              				return this[key];
+            			}
+          			} 
+          			return null;
+        		};
 				
 			</script>
 			
