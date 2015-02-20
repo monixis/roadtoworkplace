@@ -1153,5 +1153,10 @@ img{
 
 #rss-news{
 	height: 145px;
-	overflow-y: hidden;
+    overflow-y: auto;
+    
+}
+
+#citations ul{
+	list-style-type: none;
 }

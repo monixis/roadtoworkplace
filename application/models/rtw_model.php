@@ -8,7 +8,7 @@ class rtw_model extends CI_Model {
 	}
 
 	function getemployerdetails($eid) {
-		$sql = "SELECT empname, website, corporatewebsite, additionalwebsites, leadership, hrcontactinfo, jobfaircontactinfo, location, region, geo, noofemp, emptype, ticker, affiliates, news, budget, facebook, twitter, socialmedia, missionstmt, overview, culture, financials, citations, size.scale as 'size' from size INNER JOIN employer ON size.sid = employer.size where eid = ?";
+		$sql = "SELECT empname, website, corporatewebsite, additionalwebsites, leadership, hrcontactinfo, jobfaircontactinfo, location, region, geo, noofemp, emptype, ticker, affiliates, news, budget, facebook, twitter, socialmedia, missionstmt, overview, culture, financials, citations, poi, size.scale as 'size' from size INNER JOIN employer ON size.sid = employer.size where eid = ?";
 		$results = $this -> db -> query($sql, array($eid));
 		return $results -> result();
 	}

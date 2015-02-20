@@ -26,12 +26,12 @@
 				});
 				
 			
-			$('#rss-news').hover(function() {
+		/*	$('#rss-news').hover(function() {
 					$(this).css('overflow-y', 'auto');
 				}, function() {
 					$(this).css('overflow-y', 'hidden');
 			});	
-			
+			*/
 			});
 			
 		
@@ -77,7 +77,7 @@
 					<div id="options"><a href="<?php echo base_url(); ?>" title="Home" target="_self"><img class="mainoptions" src="./icons/home.png" /></a><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
 				</div>
 				<div id="empdetailsleft">
-					<?php
+						<?php
 					foreach ($result as $row) {
 						$employer = $row -> empname;
 						$website = $row -> website;
@@ -102,9 +102,40 @@
 						$culture = $row -> culture;
 						$financials = $row -> financials;
 						$citations = $row -> citations;
+						$poi = $row -> poi;
 					}
-				     ?>				
-				<h2 id="empname"><?php echo $employer; ?></h2>
+				     ?>		
+				     <h2 id="empname"><?php echo $employer; ?></h2>
+				     
+				     <p class="viewdetails" id='poi'><strong>Points of Interest: </strong><br/>
+						<?php echo $poi; ?>
+					</p>
+					
+				     	
+					<p class="viewdetails" id='overview'><strong>Employer Overview: </strong><br/>
+						<?php echo $overview; ?>
+					</p>
+					
+					<p class="viewdetails" id='missionstmt'><strong>Mission Statement: </strong><br/><br/>
+						<?php echo $missionstmt; ?>
+					</p>
+					
+					<p class="viewdetails" id='culture'><strong>Company Culture: </strong><br/><br/>
+						<?php echo $culture; ?>
+					</p>
+					<p class="viewdetails" id='financials'><strong>Financials: </strong><br/>
+						<?php echo $financials; ?>
+					</p>
+					<p class="viewdetails" id='citations'><strong>Citations: </strong><br/>
+						<?php echo $citations; ?>
+				    </p>
+				    
+				</div>
+			
+				<div id="empdetailsright">
+					
+					
+				
 				<p class="viewdetails" id='ticker'><strong>Ticker: </strong><?php echo $ticker; ?></p>
 				<p class="viewdetails" id='location'><strong>Location: </strong><?php echo $location; ?></p>
 				<p class="viewdetails" id='region'><strong>Region: </strong><?php echo $region; ?></p>
@@ -165,26 +196,7 @@
 						</a>&nbsp;
 					<?php } ?>
 				</p>
-					
-				</div>
-			
-				<div id="empdetailsright">
-					<p class="viewdetails" id='missionstmt'><strong>Mission Statement: </strong><br/><br/>
-						<?php echo $missionstmt; ?>
-					</p>
-					<p class="viewdetails" id='overview'><strong>Employer Overview: </strong><br/>
-						<?php echo $overview; ?>
-					</p>
-					
-					<p class="viewdetails" id='culture'><strong>Company Culture: </strong><br/><br/>
-						<?php echo $culture; ?>
-					</p>
-					<p class="viewdetails" id='financials'><strong>Financials: </strong><br/>
-						<?php echo $financials; ?>
-					</p>
-					<p class="viewdetails" id='citations'><strong>Citations: </strong><br/>
-						<?php echo $citations; ?>
-				    </p>
+				
 				</div>
 				
 		</div>
