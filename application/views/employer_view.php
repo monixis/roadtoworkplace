@@ -32,6 +32,7 @@
 					$(this).css('overflow-y', 'hidden');
 			});	
 			*/
+			
 			});
 			
 		
@@ -96,6 +97,8 @@
 						$budget = $row -> budget;
 						$facebook = $row -> facebook;
 						$twitter = $row -> twitter;
+						$linkedin = $row -> linkedin;
+						$taxforms = $row -> taxforms;
 						$socialmedia = $row -> socialmedia;
 						$missionstmt = $row -> missionstmt;
 						$overview = $row -> overview;
@@ -126,6 +129,9 @@
 					<p class="viewdetails" id='financials'><strong>Financials: </strong><br/>
 						<?php echo $financials; ?>
 					</p>
+					<p class="viewdetails" id='taxforms'><strong>990 Tax Forms: </strong><br/>
+						<?php echo $taxforms; ?>
+				    </p>
 					<p class="viewdetails" id='citations'><strong>Citations: </strong><br/>
 						<?php echo $citations; ?>
 				    </p>
@@ -167,6 +173,7 @@
 					<!--a href=<?php echo $news; ?> target="_blank"><img class="icons" src="./icons/rss.png"/></a-->
 					<a href=<?php echo $twitter; ?> target="_blank"><img class="icons" src="./icons/twitter.png"/></a>
 					<a href=<?php echo $facebook; ?> target="_blank"><img class="icons" src="./icons/facebook.png"/></a>
+					<a href=<?php echo $linkedin; ?> target="_blank"><img class="icons" src="./icons/linkedin.png"/></a>
 				</p>
 				
 				<p class="viewdetails" id='othersocialmedia'><strong>Other Social Media Links: </strong><br/><br/>
