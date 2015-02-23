@@ -172,8 +172,7 @@
 				<p class="viewdetails" id='othersocialmedia'><strong>Other Social Media Links: </strong><br/><br/>
 					<?php echo $socialmedia; ?>
 				</p>
-				
-				<p class="viewdetails" id='major'><strong>Associated Majors: </strong><br/><br/>
+								<p class="viewdetails" id='major'><strong>Associated Majors: </strong><br/><br/>
 					<?php
 					foreach ($majors as $row1) {
 						$mid = $row1 -> mid;
@@ -186,6 +185,7 @@
 				</p>
 				
 				<p class="viewdetails" id='industry'><strong>Associated Industries: </strong><br/><br/>
+
 					<?php
 					foreach ($industries as $row2) {
 						$iid = $row2 -> iid;
@@ -213,42 +213,6 @@
 			</div>
 			<script type="text/javascript">
 				window.onload = function(){
-
-					//alert(document.getElementById('financials').innerHTML);
-					// debugger;
-				/*	if(document.getElementById('ticker').innerHTML == '<strong>Ticker: </strong>'){
-						document.getElementById('ticker').innerHTML = '';
-					}
-					if(document.getElementById('location').innerHTML == '<strong>Location: </strong>'){
-						document.getElementById('location').innerHTML = '';
-					}
-					if(document.getElementById('region').innerHTML == '<strong>Region: </strong>'){
-						document.getElementById('region').innerHTML = '';
-					}
-					if(document.getElementById('noofemp').innerHTML == '<strong>No. of Employees: </strong>'){
-						document.getElementById('noofemp').innerHTML = '';
-					}
-					if(document.getElementById('affiliates').innerHTML == '<strong>Affiliates: </strong>'){
-						document.getElementById('affiliates').innerHTML = '';
-					}
-					if(document.getElementById('budget').innerHTML == '<strong>Budget: </strong>'){
-						document.getElementById('budget').innerHTML = '';
-					}
-					if(document.getElementById('contactinfo').innerHTML.trim() == '<strong>Contact Information: </strong><br><br>'){
-						document.getElementById('contactinfo').innerHTML = '';
-					}
-					if(document.getElementById('othersocialmedia').innerHTML.trim() == '<strong>Other Social Media Links: </strong><br><br>'){
-						document.getElementById('othersocialmedia').innerHTML = '';
-					}
-					if(document.getElementById('culture').innerHTML.trim() == '<strong>Company Culture: </strong><br><br>'){
-						document.getElementById('culture').innerHTML = '';
-					}
-					if(document.getElementById('financials').innerHTML.trim() == '<strong>Financials: </strong><br>'){
-						document.getElementById('financials').innerHTML = '';
-					}
-					if (document.getElementById('citations').innerHTML.trim() == '<strong>Citations: </strong><br>') {
-						document.getElementById('citations').innerHTML = '';
-					};*/
 
 					var tags = document.getElementsByTagName('p')
 					for (var i = 0; i < tags.length; i++) {

@@ -304,9 +304,10 @@
 				
 				
 				function search(){
+					var url;
 					
 					if (etype == 0){
-						url = "<?php echo base_url("?c=rtw&m=getrefinedemployers"); ?>" + "&qry=emptype%20in%20(1,2,3,4,5,6)"; 
+						url = "<?php echo base_url("?c=rtw&m=getrefinedemployers"); ?>" + "&qry=emptype%20in%20(1,2,3,4)";
 							
 					}else{
 						url = "<?php echo base_url("?c=rtw&m=getrefinedemployers"); ?>" + "&qry=emptype%20in%20(" + etype + ")"; 
@@ -321,6 +322,9 @@
 						url = url  + "%20and%20iid%20in%20(" + ind + ")";
 					}
 					
+					if (maj.length == 0 && ind.length == 0 && etype == 0) {
+						url = "http://localhost/roadtoworkplace/?c=rtw&m=getemployers";
+					};
 				
 				var librarytips = ["Marist Library subscribes to more than 200 databases that you can use for your research.", "Marist Library holds about 195,000 print books.", "Through Marist Library you can get access to 131,000 e-books and 75,000 e-Journals.", "Students may reserve one of the Library's fifteen Collaborative Rooms", "Stop by or make an appointment with our Librarians for a research consulation.", "Fox Hunt searches relevant scholarly and academic resources provided by the Libray."];
 				//alert(url);
@@ -333,7 +337,7 @@
 				$("#emplist").empty();
 				$("#emplist").html('<div id="searching" style="margin-top: 155px; text-align: center;"><img src="./icons/loading.gif" /><br/><p style="text-align: center;">'+ librarytips[tips] +'</p></div>');	
 				
-				
+				console.log(url);
 				setTimeout (function(){
 				
 				
