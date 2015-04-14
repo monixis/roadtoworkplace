@@ -3,27 +3,22 @@
 <html lang="en">
 	<head>
 		<title><?php echo $title; ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="shortcut icon" href="http://library.marist.edu/images/jac.png" />
 		<link rel="stylesheet" type="text/css" href="./style/main.css" />
 		<link rel="stylesheet" type="text/css" href="http://library.marist.edu/css/menuStyle.css" />
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 		<script src="http://library.marist.edu/js/libraryMenu.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="http://library.marist.edu/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 		<script src="http://library.marist.edu/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("a[rel^='prettyPhoto']").prettyPhoto({
-					slideshow : false,
-					allow_resize : true, /* Resize the photos bigger than viewport. true/false */
-					autoplay : false, /* Automatically start videos: True/False */
-					deeplinking : false, /* Allow prettyPhoto to update the url to enable deeplinking. */
-					overlay_gallery : false, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
-					keyboard_shortcuts : false,
-					theme: "facebook"
-				});
-			});
-		</script>
+		<script src="./js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto();
+  });
+</script>
 		<script type="text/javascript">	
 		
 			$(document).ready(function() {
@@ -84,7 +79,9 @@
 					
 
 					<h1 style="color: #b31b1b; text-align: center;">Road to the Workplace</h1>
-					<div id="options"><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
+					<!--div id="options"><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" rel="prettyphoto"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div-->
+				<div id="options"><a href="<?php echo base_url(); ?>" title="Home" target="_self"><img class="mainoptions" src="./icons/home.png" /></a><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" rel="prettyPhoto"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
+				
 				</div>
 				
 				<div id="breadcrumbs">

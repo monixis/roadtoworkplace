@@ -7,37 +7,18 @@
 		<link rel="shortcut icon" href="http://library.marist.edu/images/jac.png" />
 		<link rel="stylesheet" type="text/css" href="./style/main.css" />
 		<link rel="stylesheet" type="text/css" href="http://library.marist.edu/css/menuStyle.css" />
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 		<script src="http://library.marist.edu/js/libraryMenu.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="http://library.marist.edu/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 		<script src="http://library.marist.edu/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 		<script src="./js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
 		
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("a[rel^='prettyPhoto']").prettyPhoto({
-					slideshow : false,
-					allow_resize : true, /* Resize the photos bigger than viewport. true/false */
-					autoplay : false, /* Automatically start videos: True/False */
-					deeplinking : false, /* Allow prettyPhoto to update the url to enable deeplinking. */
-					overlay_gallery : false, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
-					keyboard_shortcuts : false,
-					theme: "facebook"
-				});
-				
-			
-		/*	$('#rss-news').hover(function() {
-					$(this).css('overflow-y', 'auto');
-				}, function() {
-					$(this).css('overflow-y', 'hidden');
-			});	
-			*/
-			
-			});
-			
-		
-				
-		</script>
+		<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto();
+  });
+</script>
 		<script>
 			(function(i, s, o, g, r, a, m) {
 				i['GoogleAnalyticsObject'] = r;
@@ -75,7 +56,7 @@
 				<div style="width: 12px; float:left;"><img src="./icons/beta.gif" /></div>	
 				<div id="rtwoptions" style="margin-bottom: 5px;">
 					<h1 style="color: #b31b1b; text-align: center;">Road to the Workplace</h1>
-					<div id="options"><a href="<?php echo base_url(); ?>" title="Home" target="_self"><img class="mainoptions" src="./icons/home.png" /></a><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" target="_blank" rel="prettyphoto[iframes]"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
+					<div id="options"><a href="<?php echo base_url(); ?>" title="Home" target="_self"><img class="mainoptions" src="./icons/home.png" /></a><a href="http://libguides.marist.edu/RoadtotheWorkplace" title="Road to the Workplace: Research Tools" target="_blank"><img class="mainoptions" src="./icons/libguides.png" /></a><a href="http://library.marist.edu/forms/ask.php" title="Ask-a-Librarian" target="_blank"><img class="mainoptions" src="./icons/contact.png" /></a><a href="<?php echo base_url("?c=rtw&m=disclaimer?iframe=true&width=47%&height=55%"); ?>" rel="prettyphoto"><img class="mainoptions" src="./icons/disclaimer.png" /></a></div>
 				</div>
 				<div id="empdetailsleft">
 						<?php
@@ -140,7 +121,6 @@
 			
 				<div id="empdetailsright">
 					
-					
 				
 				<p class="viewdetails" id='ticker'><strong>Ticker: </strong><?php echo $ticker; ?></p>
 				<p class="viewdetails" id='location'><strong>Location: </strong><?php echo $location; ?></p>
@@ -170,22 +150,27 @@
 				</div>
 				
 				<p class="viewdetails"><strong>Social Media: </strong><br/><br/>
-					<!--a href=<?php echo $news; ?> target="_blank"><img class="icons" src="./icons/rss.png"/></a-->
-					<a href=<?php echo $twitter; ?> target="_blank"><img class="icons" src="./icons/twitter.png"/></a>
+					<!--a href=<?php echo $twitter; ?> target="_blank"><img class="icons" src="./icons/twitter.png"/></a>
 					<a href=<?php echo $facebook; ?> target="_blank"><img class="icons" src="./icons/facebook.png"/></a>
-					<a href=<?php echo $linkedin; ?> target="_blank"><img class="icons" src="./icons/linkedin.png"/></a>
+					<a href=<?php echo $linkedin; ?> target="_blank"><img class="icons" src="./icons/linkedin.png"/></a-->
+					<div id="socialmedias">
+						<?php echo $facebook; ?> 
+					<?php echo $twitter; ?> 
+					<?php echo $linkedin; ?>	
+					</div>	
+					
 				</p>
 				
 				<p class="viewdetails" id='othersocialmedia'><strong>Other Social Media Links: </strong><br/><br/>
 					<?php echo $socialmedia; ?>
 				</p>
-								<p class="viewdetails" id='major'><strong>Associated Majors: </strong><br/><br/>
+				<p class="viewdetails" id='major'><strong>Associated Majors: </strong><br/><br/>
 					<?php
 					foreach ($majors as $row1) {
 						$mid = $row1 -> mid;
 						$major = $row1 -> major;
 					?>
-						<a class="refinelist" href="<?php echo base_url("?c=rtw&m=getrefinedemployers&qry=emptype%20in%20(1,2,3,4,5,6)%20and%20mid%20in%20(". $mid .")?iframe=true&width=45%&height=65%"); ?>" rel="prettyphoto[iframes]">
+						<a class="refinelist" href="<?php echo base_url("?c=rtw&m=getrefinedemployers&qry=emptype%20in%20(1,2,3,4,5,6)%20and%20mid%20in%20(". $mid .")?iframe=true&width=45%&height=65%"); ?>" rel="prettyphoto">
 							<?php echo $major; ?>
 						</a>&nbsp;
 					<?php } ?>
@@ -198,10 +183,11 @@
 						$iid = $row2 -> iid;
 						$industry = $row2 -> industry;
 					?>
-						<a class="refinelist" href="<?php echo base_url("?c=rtw&m=getrefinedemployers&qry=emptype%20in%20(1,2,3,4,5,6)%20and%20iid%20in%20(". $iid .")?iframe=true&width=45%&height=65%"); ?>" rel="prettyphoto[iframes]">
+						<a class="refinelist" href="<?php echo base_url("?c=rtw&m=getrefinedemployers&qry=emptype%20in%20(1,2,3,4,5,6)%20and%20iid%20in%20(". $iid .")?iframe=true&width=45%&height=65%"); ?>" rel="prettyphoto">
 							<?php echo $industry; ?>
 						</a>&nbsp;
 					<?php } ?>
+					
 				</p>
 				
 				</div>
@@ -214,13 +200,12 @@
 					<br />
 					&#169; Copyright 2007-2014 Marist College. All Rights Reserved.
 
-					<a href="http://www.marist.edu/disclaimers.html" target="_blank">Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a> 
+					<a href="http://www.marist.edu/disclaimers.html" target="_blank" rel="prettyphoto[iframes]">Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy </a> 
 				</p>
 
 			</div>
 			<script type="text/javascript">
-				window.onload = function(){
-
+			
 					var tags = document.getElementsByTagName('p')
 					for (var i = 0; i < tags.length; i++) {
 						if(tags[i].nextSibling.nodeName != 'UL'){
@@ -234,6 +219,7 @@
 
 				}
 				
+			
 				$('#rss-news').ready(function(){
 					//https://news.google.com/news/feeds?pz=1&cf=all&ned=ENGLISH&hl=US&q=secret%20service&output=rss
 		     		$("#rss-news").rss("<?php echo $news; ?>", {
