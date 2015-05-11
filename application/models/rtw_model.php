@@ -30,6 +30,50 @@ class rtw_model extends CI_Model {
 		$results = $this -> db -> query($sql);
 		return $results -> result();
 	}
+
+	function getspecificemployer($qry){
+		$sql = "SELECT * FROM employer INNER JOIN employertype ON employer.emptype = employertype.tid WHERE eid = " . $qry;
+		$results = $this -> db -> query($sql);
+		return $results -> result();
+	}
+
+	function getempresults($qry){
+		$sql = "SELECT DISTINCT eid, empname FROM employer WHERE empname LIKE '%" . $qry . "%'";
+		$results = $this -> db -> query($sql);
+		return $results -> result();
+	}
+
+	function deleteEmp($eid){
+		if ($this -> db -> simple_query("DELETE FROM employer WHERE eid = $eid")) {
+			$this -> db -> query("DELETE FROM employer WHERE eid = $eid");
+			return "Delete Successful";
+		} 
+		else {
+			return "Delete Unsuccessful";
+		}
+	}
+
+	function updateEmp($emp){
+		$this -> db -> where('eid' , $emp['eid']);
+		$this -> db -> update("employer", $emp);
+	}
+
+	function addEmp($emp){
+		// $sql = "INSERT INTO employer VALUES ('" . $emp['timestamp'] . "', " . $emp['eid'] . 
+		// 	", '" . $emp['empname'] . "', '" . $emp['missionstmt'] . "', '" . $emp['overview'] . 
+		// 	"', '" . $emp['website'] . "', '" . $emp['corporatewebsite'] . "', '" . $emp['additionalwebsites'] . 
+		// 	"', '" . $emp['leadership'] . "', '" . $emp['culture'] . "', '" . $emp['hrcontactinfo'] . 
+		// 	"', '" . $emp['jobfaircontactinfo'] . "', '" . $emp['location'] . "', '" . $emp['region'] . 
+		// 	"', '" . $emp['geo'] . "', '" . $emp['size'] . "', '" . $emp['noofemp'] . "', '" . $emp['emptype'] . 
+		// 	"', '" . $emp['ticker'] . "', '" . $emp['affiliates'] . "', '" . $emp['financials'] . "', '" . $emp['industry'] .
+		// 	 "', '" . $emp['majors'] . "', '" . $emp['news'] . "', '" . $emp['citations'] . "', '" . 
+		// 	 "', '" . $emp['yourName'] . "', '" . $emp['budget'] . "', '" . $emp['facebook'] . "', '" . $emp['twitter'] . 
+		// 	 "', '" . $emp['socialmedia'] . "', '" . $emp['taxforms'] . "', '" . $emp['linkedin'] . "', '" . $emp['poi'] . "')" ;
+
+		// $query = $this -> db -> query($sql);
+		$this -> db -> insert('employer', $emp);
+		return $emp['empname'] . " Added";
+	}
 	
 	function getemployerstype() {
 		$sql = "SELECT tid, type from employertype ORDER BY type ASC";
@@ -64,27 +108,11 @@ class rtw_model extends CI_Model {
 	}
 	
 	function getrefinedemployers($qry){
-		//$qry1 = "emptype in (1,2)";
 		$sql = "SELECT DISTINCT eid, empname FROM employertype INNER JOIN employer ON employertype.tid = employer.emptype INNER JOIN empind on employer.eid = empind.empid INNER JOIN empmaj on employer.eid = empmaj.empid where ";
-		//$sql = "SELECT DISTINCT eid, empname FROM ((employertype INNER JOIN employer ON employertype.tid = employer.emptype) INNER JOIN empind ON employer.eid = empind.empid) INNER JOIN empmaj ON employer.eid = empmaj.empid WHERE where emptype = 1";
-	   //$sql = "SELECT eid, empname FROM empdetails";
-		// if($qry == "emptype%20in%20(1,2,3,4)"){
-		// 	$sql = 
-		// }
-		// else{
-			$sql = $sql . $qry;
-		// }
+		$sql = $sql . $qry;
 		$results = $this -> db -> query($sql);
 		return $results -> result();
 	}
-	
-	/*function getrefinedemployers(){
-		$sql = "SELECT eid, empname FROM employer where eid%20in%20(1,2)";
-		$results = $this -> db -> query($sql);
-		return $results -> result();
-	}*/
-	
-	
 	
 }
 ?>
