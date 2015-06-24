@@ -48,6 +48,7 @@ class rtw extends CI_Controller {
 	public function admin() {
 		$this -> load -> model('rtw_model');
 		$data['result'] = $this -> rtw_model -> getemployers();
+		$data['passcode'] = $this -> rtw_model -> getpasscode();
 		$this -> load -> view('admin', $data);
 	}
 
@@ -58,6 +59,8 @@ class rtw extends CI_Controller {
 		$data['result'] = $this -> rtw_model -> getemployerdetails($eid);
 		$data['majors'] = $this -> rtw_model -> getassociatedmajors($eid);
 		$data['industries'] = $this -> rtw_model -> getassociatedindustry($eid);
+		$data['addmajors'] = $this -> rtw_model -> getmajorsforadmin($eid);
+		$data['addindustry'] = $this -> rtw_model -> getindustryforadmin($eid);
 		$this -> load -> view('admin_view', $data);
 	}
 
@@ -72,28 +75,70 @@ class rtw extends CI_Controller {
 		$this -> load -> model('rtw_model');
 		$result = $this -> rtw_model -> updaterecords($eid, $col, $val);
 		echo $result;
-		
 	}
 
 	public function newemployer() {
 		$this -> load -> model('rtw_model');
 		$data['emptype'] = $this -> rtw_model -> getemployerstype();
-		$data['majors'] = $this -> rtw_model -> getmajors();
-		$data['majors1'] = $this -> rtw_model -> getmajors1();
-		$data['industry'] = $this -> rtw_model -> getindustry();
-		$data['industry1'] = $this -> rtw_model -> getindustry1();
+		//$data['empid'] = $this -> rtw_model -> getempid();
 		$this -> load -> view('newemployer', $data);
 	}
 	
 	public function newentry(){
-		$col = $_POST['col'];
-		$val = $_POST['val'];
+		$empname = $_POST['empname'];
+		$emptype = $_POST['emptype'];
+		$yourname = $_POST['yourname'];
+		$this -> load -> model('rtw_model');
+		$eid = $this -> rtw_model -> getmaxid('eid', 'employer');
+		$result = $this -> rtw_model -> insertnewemployer($eid, $empname, $emptype, $yourname);
+		echo $result;
+	}
+		
+	public function majors_unselected(){
+		$col1 = $_POST['col1'];
 		$eid = $_POST['eid'];
 		$this -> load -> model('rtw_model');
-		$result = $this -> rtw_model -> updaterecords($eid, $col, $val);
+		$result = $this -> rtw_model -> removerecords($eid, $col1, 1);
 		echo $result;
-		
 	}
+	
+	public function majors_selected(){
+		$col = $_POST['col'];
+		$eid = $_POST['eid'];
+		$this -> load -> model('rtw_model');
+		$id = $this -> rtw_model -> getmaxid('id', 'empmaj');
+		$result = $this -> rtw_model -> addrecords($eid, $col, $id, 1);
+		echo $result;
+	}
+	
+	public function industry_unselected(){
+		$col1 = $_POST['col1'];
+		$eid = $_POST['eid'];
+		$this -> load -> model('rtw_model');
+		$result = $this -> rtw_model -> removerecords($eid, $col1, 2);
+		echo $result;
+	}
+	
+	public function industries_selected(){
+		$col = $_POST['col'];
+		$eid = $_POST['eid'];
+		$this -> load -> model('rtw_model');
+		$id = $this -> rtw_model -> getmaxid('id', 'empind');
+		$result = $this -> rtw_model -> addrecords($eid, $col, $id, 2);
+		echo $result;
+	}
+	// just for testing 
+	/*public function getpasscode(){
+		$this -> load -> model('rtw_model');
+		$result = $this -> rtw_model -> getpasscode();
+		echo $result ;
+	}
+	
+	public function getmax(){
+		$this -> load -> model('rtw_model');
+		$result = $this -> rtw_model -> getmaxid('eid', 'employer');
+		echo $result ;
+	}*/
 	
 }
 ?>

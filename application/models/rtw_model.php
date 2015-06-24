@@ -94,5 +94,62 @@ class rtw_model extends CI_Model {
 		$this -> db -> update('employer', $data);*/
 	}
 	
+	function removerecords($eid,$col1, $val){
+		if ($val == 1){
+			$sql ="DELETE FROM empmaj where empid = '$eid' and mid = '$col1'";
+		}else if ($val == 2){
+			$sql ="DELETE FROM empind where empid = '$eid' and iid = '$col1'";
+		}
+		$result = $this -> db -> query($sql, array($eid, $col1));
+		return $result;
+	}
+	
+	function addrecords($eid, $col, $id, $val){
+		if ($val == 1){
+			$sql ="INSERT into empmaj (id, empid, mid) values ('$id', '$eid', '$col')";
+		}else if ($val == 2){
+			$sql ="INSERT into empind (id, empid, iid) values ('$id', '$eid', '$col')";
+		}
+		$result = $this -> db -> query($sql, array($id, $eid, $col));
+		return $result;
+	}
+	
+	function insertnewemployer($eid, $empname, $emptype, $yourname){
+		$sql = "INSERT into employer (eid, empname, emptype, yourName) values ($eid, '$empname', '$emptype', '$yourname')";
+		$result = $this -> db -> query($sql, array($eid, $empname, $emptype, $yourname));
+		return $result;
+	}
+	
+	function getmaxid($col, $table){
+		$this -> db -> select_max($col);
+		$query = $this -> db -> get($table);
+		foreach ($query -> result() as $row){
+			$maxval = $row -> $col;
+		}
+		$maxval = $maxval + 1;
+		return $maxval;
+	}
+		
+	function getpasscode(){
+		$this -> db -> select('passcode');
+		$query = $this -> db -> get('passcode');
+		foreach ($query -> result() as $row){
+			$passcode = $row -> passcode;
+		}
+		return $passcode;
+	}
+	
+	function getmajorsforadmin($eid) {
+		$sql = "SELECT mid, major from majors WHERE mid not in (SELECT mid FROM empmaj WHERE empid = $eid) ORDER BY major ASC";
+		$results = $this -> db -> query($sql, array($eid));
+		return $results -> result();
+	}
+	
+	function getindustryforadmin($eid) {
+		$sql = "SELECT iid, industry from industry WHERE iid not in (SELECT iid FROM empind WHERE empid = $eid) ORDER BY industry ASC";
+		$results = $this -> db -> query($sql, array($eid));
+		return $results -> result();
+	}
+	
 }
 ?>

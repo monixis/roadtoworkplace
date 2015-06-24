@@ -39,15 +39,28 @@
 
 			<h2 id="empname"><?php echo $employer; ?></h2>
 			<a href="<?php echo $empurl; ?>" target="_blank" style="font-size: small; margin-left: 10px;">View employer's page</a>
-			<!--div id="status"> </div-->
+			
+			<input type="button" id="undo" value="Revert Back" style="float: right;"> 
+			</input>
+
+			<p>
+				<strong>Employer's Name: </strong>
+			</p>
+			<textarea rows="4" cols="50" id='empname'>
+						<?php echo $employer; ?> 
+					</textarea>
+			<input type="button" class="edit" id="empname" value="Edit"> 
+			</input>
+			
 			<p>
 				<strong>Points of Interest: </strong>
 			</p>
 			<textarea rows="4" cols="50" id='poi'>
 						<?php echo $poi; ?> 
 					</textarea>
-			<input type="button" class="edit" id="poi" value="Edit">
+			<input type="button" class="edit" id="poi" value="Edit"> 
 			</input>
+			
 
 			<p>
 				<strong>Employer Overview: </strong>
@@ -57,6 +70,7 @@
 					</textarea>
 			<input type="button" class="edit" id="overview" value="Edit">
 			</input>
+			
 
 			<p>
 				<strong>Mission Statement: </strong>
@@ -66,6 +80,7 @@
 					</textarea>
 			<input type="button" class="edit" id="missionstmt" value="Edit">
 			</input>
+			
 
 			<p>
 				<strong>Company Culture: </strong>
@@ -102,7 +117,83 @@
 				    </textarea>
 			<input type="button" class="edit" id="citations" value="Edit">
 			</input>
+			
+			<p><strong>Remove Associated Majors:</strong></p>
+					<div id="maj">
+					<?php
+					foreach ($majors as $row1) {
+						$mid = $row1 -> mid;
+						$major = $row1 -> major;
+					?>
+						<div id="<?php echo $mid; ?>">
+							<input class="majors" type="checkbox" name="<?php echo $major; ?>" id="<?php echo $mid; ?>" checked>
+							<?php echo $major; ?>
+							</input>
+						</div>
+						
+					<?php } ?></br>
+					</div>
+			<input type="button" id="majors" value="Remove"></input>
+						
+			<p><strong>Add majors: </strong></p>
+			<div id="addmaj">
+				<?php
+						foreach ($addmajors as $row2) {
+						$mid = $row2 -> mid;
+						$major = $row2 -> major;
+						?>
+						<div id="<?php echo $mid; ?>">
+						<input class="addmajors" type="checkbox" name="<?php echo $major; ?>" id="<?php echo $mid; ?>">
+						<?php echo $major; ?>
+						</input>
+					    </div>
+					
 
+						<?php } ?>
+
+						<br/>
+						<input type="button" class="LinkMajors" id="LinkMajors" value="Link associated majors">
+						</input>
+			</div>
+
+			<p><strong>Remove Associated Industries:</strong></p>
+					<div id="ind">
+					<?php
+					foreach ($industries as $row1) {
+						$iid = $row1 -> iid;
+						$industry = $row1 -> industry;
+					?>
+						<div id="<?php echo $iid; ?>">
+							<input class="industry" type="checkbox" name="<?php echo $industry; ?>" id="<?php echo $iid; ?>" checked>
+							<?php echo $industry; ?>
+							</input>
+						</div>
+						
+					<?php } ?></br>
+					</div>
+			<input type="button" id="industry" value="Remove"></input>
+			
+			<p><strong>Add Industries: </strong></p>
+			<div id="addind">
+				<?php
+						foreach ($addindustry as $row2) {
+						$iid = $row2 -> iid;
+						$industry = $row2 -> industry;
+						?>
+						<div id="<?php echo $iid; ?>">
+							<input class="addind" type="checkbox" name="<?php echo $industry; ?>" id="<?php echo $iid; ?>">
+							<?php echo $industry; ?>
+							</input>
+					    </div>
+					
+				<?php } ?>
+
+						<br/>
+			</div>
+			<input type="button" class="LinkIndustry" id="LinkIndustry" value="Link associated industries"></input>
+			
+			
+	
 	</div>
 
 	<div id="empdetailsright">
@@ -231,30 +322,126 @@
 		<input type="button" class="edit" id="socialmedia" value="Edit">
 		</input>
 		
-			
+		
 
-		<script type="text/javascript">
-			$("input.edit").click(function(){
-
-var col = $(this).attr('id');
-var txt = "textarea#" + col;
-var val = $(txt).val();
-var eid = <?php echo $eid ?>;
-
-$.post("<?php echo base_url("?c=rtw&m=data_submitted"); ?>
-	",{col: col, val: val, eid: eid})
-	.done(function(data){
-	if (data == 1){
-	$(txt).css('border', '3px solid green');
-	// alert ("Data Update successful for: " + col);
-	}else{
-	$(txt).css('border', '3px solid red');
-	alert ("Data update Failed. Contact Monish Singh.");
-	}
-
+	<script type="text/javascript">
+	var eid = <?php echo $eid ?>;
+	$("input.edit").click(function(){
+		var col = $(this).attr('id');
+		var txt = "textarea#" + col;
+		var val = $(txt).val();
+				$.post("<?php echo base_url("?c=rtw&m=data_submitted"); ?>",{col: col, val: val, eid: eid}).done(function(data){
+						if (data == 1){
+								$(txt).css('border', '3px solid green');
+										setTimeout(function(){
+											$(txt).css('border', '1px solid grey');
+										}, 2000)
+						}
+						else {
+								$(txt).css('border', '3px solid red');
+								alert ("Data update Failed. Contact Monish Singh.");
+						}
+				});
 	});
+
+	$("input#undo").click(function(){
+	document.execCommand('undo', false, null);
 	});
-		</script>
+	
+	
+	$("input#majors").click(function(){
+		$("input.majors").each(function(){
+			if (!$(this).is(":checked")){
+					var col1 = $(this).attr('id');
+						$.post("<?php echo base_url("?c=rtw&m=majors_unselected"); ?>",{col1: col1, eid: eid}).done(function(data){
+							if (data == 1){
+											$("div#maj").children("div#" + col1).css("text-decoration", "line-through");
+											$("div#maj").css('border', '3px solid green');
+													setTimeout(function(){
+																$("div#maj").css('border', '1px solid grey');
+																		}, 2000)
+							}else{
+									$("div#maj").css('border', '3px solid red');
+									alert ("Data update Failed. Contact Monish Singh.");
+									}
+
+							});
+
+				}
+			});
+		});
+	
+	$("input#industry").click(function(){
+		$("input.industry").each(function(){
+			if (!$(this).is(":checked")){
+					var col1 = $(this).attr('id');
+						$.post("<?php echo base_url("?c=rtw&m=industry_unselected"); ?>",{col1: col1, eid: eid}).done(function(data){
+							if (data == 1){
+											$("div#ind").children("div#" + col1).css("text-decoration", "line-through");
+											$("div#ind").css('border', '3px solid green');
+													setTimeout(function(){
+																$("div#ind").css('border', '1px solid grey');
+																		}, 2000)
+							}else{
+									$("div#ind").css('border', '3px solid red');
+									alert ("Data update Failed. Contact Monish Singh.");
+									}
+
+							});
+
+				}
+			});
+		});
+	
+	$("input#LinkMajors").click(function(){
+		$("input.addmajors").each(function(){
+			if ($(this).is(":checked")){
+					var col = $(this).attr('id');
+					alert(col);
+						$.post("<?php echo base_url("?c=rtw&m=majors_selected"); ?>",{col: col, eid: eid}).done(function(data){
+							if (data == 1){
+											$("div#addmaj").children("div#" + col).css("text-decoration", "line-through");
+											$("div#addmaj").css('border', '3px solid green');
+													setTimeout(function(){
+																$("div#addmaj").css('border', '1px solid grey');
+																		}, 2000)
+							}else{
+									$("div#addmaj").css('border', '3px solid red');
+									alert ("Data Entry Failed. Contact Monish Singh.");
+									}
+
+							});
+
+				}
+			});
+		});
+		
+		$("input#LinkIndustry").click(function(){
+		$("input.addind").each(function(){
+			if ($(this).is(":checked")){
+					var col = $(this).attr('id');
+						$.post("<?php echo base_url("?c=rtw&m=industries_selected"); ?>",{col: col, eid: eid}).done(function(data){
+							if (data == 1){
+											$("div#addind").children("div#" + col).css("text-decoration","line-through");
+											$("div#addind").css('border', '3px solid green');
+													setTimeout(function(){
+																$("div#addind").css('border', '1px solid grey');
+																		}, 2000)
+																		
+							}else{
+									$("div#addind").css('border', '3px solid red');
+									alert ("Data Entry Failed. Contact Monish Singh.");
+									}
+
+							});
+
+				}
+				
+			});
+		});
+
+
+	</script>
 		</form>
 	</div>
 </div>

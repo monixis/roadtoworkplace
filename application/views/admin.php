@@ -11,7 +11,6 @@
 		<link rel="stylesheet" href="http://library.marist.edu/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 		<script src="http://library.marist.edu/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 		<script src="./js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
-		
 		<script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
     $("a[rel^='prettyPhoto']").prettyPhoto();
@@ -56,7 +55,7 @@
 				<div id="rtwoptions" style="margin-bottom: 5px;">
 					<h1 style="color: #b31b1b; text-align: center;">Admin - Road to the Workplace</h1>
 				</div>
-				<select id="employers">
+				<select id="employers" style="visibility: hidden;">
 					<option value="0">SELECT AN EMPLOYER TO EDIT</option>
 				<?php
 					foreach ($result as $row) {
@@ -67,11 +66,17 @@
 					<option value="<?php echo $empid; ?>"><?php echo $employer; ?></option>
 					<?php
 					}
+					
 					?>	
 				</select>
-				<input type="button" id="newEmp" value="Add a New Employer" style="float:right;"></input>
+				<!--input type="button" id="newEmp" value="Add a New Employer" style="float:right;"></input-->
+				<a href="http://localhost/roadtoworkplace/?c=rtw&m=newemployer" id ="newemp" target="_self" style="float:right; visibility: hidden;">Add Employer</a>
 				<div id="empDetails">
-				
+						<div id="passcode" style="margin-top:0px; margin-left: auto; margin-right: auto; width: 300px; margin-bottom: 5px;">
+							<strong>PASSCODE: </strong>
+							<input type="password" name='passcode' id='passcode'></input><br/>
+							<input type="button" class="Submit" id="submit" value="Submit" style="margin-left:85px; margin-top:10px;"></input>
+						</div>
 				</div>	
 				
 			</div>
@@ -92,7 +97,7 @@
 			$("select#employers").change(function(){
 				var empid= $(this).find('option:selected').val();
 				if (empid > 0){
-					var url;
+				var url;
 				url = "<?php echo base_url("?c=rtw&m=getemployerdetailsforAdmin"); ?>" + "&eid=(" + empid + ")"; 
 				$("#empDetails").empty();
 				$("#empDetails").load(url);
@@ -101,7 +106,20 @@
 					
 			});
 			
-			
+			$("input#submit").click(function(){
+				var passcode = <?php print_r($passcode);?>;
+				var pcode = $("input#passcode").val();
+				if (passcode == pcode){
+					$("select#employers").css("visibility", "visible");
+					$("a#newemp").css("visibility", "visible");
+					$("div#passcode").css("visibility", "hidden");
+				}else{
+					$("input#passcode").css('border', '3px solid red');
+					setTimeout(function(){
+						$("input#passcode").css('border', '1px solid grey');
+					}, 2000)
+				}	
+			});
 			
 			</script>
 	</body>

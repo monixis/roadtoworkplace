@@ -54,89 +54,46 @@
 				<div id="rtwoptions" style="margin-bottom: 5px;">
 					<h1 style="color: #b31b1b; text-align: center;">Admin - Road to the Workplace</h1>
 				</div>
-<h2>Add a New Employer</h2>
+				<h2>Add a New Employer</h2>
 				<div id="empDetails" style="margin-left: 50px;">
-					
-					<p>
-						<strong>Employer Name: </strong>
-					</p>
-					<textarea rows="4" cols="50" id='empname'></textarea>
-<br/>					
 
-					<p>
-						<strong>Select the Employer Type:</strong>
-					</p>
-					<input class="refiner" type="radio" name="emptype" value="0" checked >
-					All
-					</br>
-					<?php
-					foreach ($emptype as $row1) {
-					$tid = $row1 -> tid;
-					$type = $row1 -> type;
-					?>
-					<input class="refiner" type="radio" name="emptype" value="<?php echo $tid; ?>">
-					<?php echo $type; ?>
-					</br>
-					<?php } ?><br/>
-					<input type="button" class="Add" id="empname" value="Step 1: Add an Employer">
-					</input><br/><br/>	
-					<p>
-					
-						
-						<strong>Select Majors to associate with the Employer: </strong>
-					</p>
-					<?php
-					foreach ($majors as $row2) {
-					$mid = $row2 -> mid;
-					$major = $row2 -> major;
-					?>
-					<input class="majors" type="checkbox" name="<?php echo $major; ?>" id="<?php echo $mid; ?>">
-					<?php echo $major; ?>
-					</br>
+					<form name="newemp" id="newemp" action="#" method="post">
+						<?php 
+						$admin = base_url("?c=rtw&m=admin");
+						?>
+						<p>
+							<strong>Employer Name: </strong>
+						</p>
+						<input type="text" name='emp' id='emp'></input>
+						<br/>
 
-					<?php } ?>
-
-					<?php
-					foreach ($majors1 as $row4) {
-					$moremid = $row4 -> mid;
-					$moremajor = $row4 -> major;
-					?>
-					<input class="majors" type="checkbox" name="<?php echo $major; ?>" id="<?php echo $moremid; ?>">
-					<?php echo $moremajor; ?>
-					</br>
-
-					<?php } ?>
-							
-					<br/>
-					<input type="button" class="LinkMajors" id="LinkMajors" value="Step 2: Link associated Majors">
-					</input><br/><br/>	
-						
-					<p>
-						<strong>Select Industies to associate with the Employer: </strong>
-					</p>
-					<?php
-					foreach ($industry as $row3) {
-						$iid = $row3 -> iid;	
-						$industry = $row3 -> industry;
-					?>
-						<input class="industry" type="checkbox" name="<?php echo $industry; ?>" id="<?php echo $iid; ?>">
-							<?php echo $industry; ?>
+						<p>
+							<strong>Select the Employer Type:</strong>
+						</p>
+						<input class="refiner" type="radio" name="emptype" value="0" checked >
+						All
 						</br>
-					<?php } ?>
-				<?php
-					foreach ($industry1 as $row5) {
-						$moreiid = $row5 -> iid;
-						$moreindustry = $row5 -> industry;
-					?>
-						<input class="industry" type="checkbox" name="<?php echo $moreindustry; ?>" id="<?php echo $moreiid; ?>">
-							<?php echo $moreindustry; ?>
+						<?php
+						foreach ($emptype as $row1) {
+						$tid = $row1 -> tid;
+						$type = $row1 -> type;
+						?>
+						<input class="refiner" type="radio" name="emptype" value="<?php echo $tid; ?>">
+						<?php echo $type; ?>
 						</br>
+						<?php } ?>
+						<p>
+							<strong>Your Name: </strong>
+						</p>
+						<input type="text" name='yourname' id='yourname'></input>
+						<br/><br/>
+						<input type="button" class="Add" id="empname" value="Add an Employer">
+				</input><br /><br />
+						<a href="<?php echo $admin ?>">Go to Admin Page to add remaining information</a>
+						<br/>
+						<br/>
 						
-				<?php } ?>	
-				<br/>
-					<input type="button" class="LinkIndustriers" id="LinkIndustriers" value="Step 3: Link associated Industries">
-					</input><br/><br/>	
-
+					</form>
 				</div>
 			</div>
 
@@ -151,19 +108,28 @@
 			</p>
 
 		</div>
+		
 		<script type="text/javascript">
-			$("select#employers").change(function(){
-var empid= $(this).find('option:selected').val();
-if (empid > 0){
-var url;
-url = "<?php echo base_url("?c=rtw&m=getemployerdetailsforAdmin"); ?>
-	" + "&eid=(" + empid + ")";
-	$("#empDetails").empty();
-	$("#empDetails").load(url);
-	}
+		$("input#empname").click(function(){
+		
+		var empname = $("input#emp").val();
+		var emptype = $("input[name='emptype']:checked").val();
+		var yourname = $("input#yourname").val();
+		$.post("<?php echo base_url("?c=rtw&m=newentry"); ?>
+			",{empname: empname, emptype: emptype, yourname: yourname})
+			.done(function(data){
+				
+			if (data == 1){
+			alert (empname + " added successfully. PLease go to the admin page to add remaining information.");
+			}else{
+	
+			alert ("Data update Failed. Contact Monish Singh.");
+			}
 
-	});
-
+			});
+	
+		
+			});
 		</script>
 	</body>
 </html>
