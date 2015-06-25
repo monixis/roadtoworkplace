@@ -70,7 +70,7 @@
 					?>	
 				</select>
 				<!--input type="button" id="newEmp" value="Add a New Employer" style="float:right;"></input-->
-				<a href="http://localhost/roadtoworkplace/?c=rtw&m=newemployer" id ="newemp" target="_self" style="float:right; visibility: hidden;">Add Employer</a>
+				<a href=<?php echo base_url("?c=rtw&m=newemployer") ?> id ="newemp" target="_self" style="float:right; visibility: hidden;">Add Employer</a>
 				<div id="empDetails">
 						<div id="passcode" style="margin-top:0px; margin-left: auto; margin-right: auto; width: 300px; margin-bottom: 5px;">
 							<strong>PASSCODE: </strong>
