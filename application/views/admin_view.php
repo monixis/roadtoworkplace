@@ -330,6 +330,7 @@
 		var col = $(this).attr('id');
 		var txt = "textarea#" + col;
 		var val = $(txt).val();
+		
 				$.post("<?php echo base_url("?c=rtw&m=data_submitted"); ?>",{col: col, val: val, eid: eid}).done(function(data){
 						if (data == 1){
 								$(txt).css('border', '3px solid green');
@@ -340,6 +341,7 @@
 						else {
 								$(txt).css('border', '3px solid red');
 								alert ("Data update Failed. Contact Monish Singh.");
+								
 						}
 				});
 	});

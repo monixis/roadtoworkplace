@@ -82,16 +82,17 @@ class rtw_model extends CI_Model {
 	}
 	
 	function updaterecords($eid,$col,$val){
-		$sql ="UPDATE employer SET $col = '$val' WHERE eid = $eid";
+		/*$sql ="UPDATE employer SET $col = '$val' WHERE eid = $eid";
 		$result = $this -> db -> query($sql, array($col, $val, $eid));
 		return $result;
-		
-		/*$data = array(
+		*/
+		$data = array(
 				$col => $val
 		);
 		
 		$this -> db -> where('eid', $eid);
-		$this -> db -> update('employer', $data);*/
+		$result = $this -> db -> update('employer', $data);
+		return $result;
 	}
 	
 	function removerecords($eid,$col1, $val){
